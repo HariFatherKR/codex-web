@@ -1,6 +1,6 @@
 'use client';
 
-import { useMemo, useState } from 'react';
+import { useState } from 'react';
 
 const messages = [
   '안녕하세요, 반가워요! 👋',
@@ -9,13 +9,10 @@ const messages = [
   '오늘도 좋은 하루 보내세요! 🌷',
 ];
 
+const headline = ['하리아빠 버튼', '하리아빠 버튼을 눌러 보세요'];
+
 export default function Home() {
   const [index, setIndex] = useState(0);
-
-  const headline = useMemo(
-    () => ['하리아빠 버튼', '하리아빠 버튼을 눌러 보세요'],
-    []
-  );
 
   const handleClick = () => {
     setIndex((current) => (current + 1) % messages.length);
