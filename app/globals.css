@@ -1,0 +1,95 @@
+:root {
+  --bg: #070a14;
+  --card: #0f172a;
+  --accent: #7c5cff;
+  --text: #e5e7eb;
+  --muted: #94a3b8;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Noto Sans KR", system-ui, -apple-system, sans-serif;
+  background: radial-gradient(circle at 20% 20%, #111827, transparent 45%),
+    radial-gradient(circle at 75% 10%, #1f2937, transparent 40%),
+    var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+}
+
+.main {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.card {
+  background: linear-gradient(145deg, #0f172a, #0b1220);
+  border-radius: 18px;
+  box-shadow: 0 15px 60px rgba(0, 0, 0, 0.35), 0 5px 20px rgba(124, 92, 255, 0.15);
+  padding: 32px;
+  max-width: 520px;
+  width: 100%;
+  text-align: center;
+  border: 1px solid rgba(148, 163, 184, 0.25);
+}
+
+.title {
+  margin-top: 0;
+  font-size: 28px;
+  letter-spacing: -0.02em;
+}
+
+.description {
+  color: var(--muted);
+  margin-bottom: 28px;
+  line-height: 1.5;
+}
+
+.message {
+  font-size: 22px;
+  font-weight: 700;
+  margin: 0 0 20px;
+  padding: 16px;
+  background: linear-gradient(130deg, rgba(124, 92, 255, 0.18), rgba(46, 134, 222, 0.16));
+  border-radius: 12px;
+  color: #f8fafc;
+  border: 1px solid rgba(124, 92, 255, 0.35);
+}
+
+.button {
+  cursor: pointer;
+  font-size: 18px;
+  padding: 12px 22px;
+  border-radius: 999px;
+  border: 1px solid rgba(124, 92, 255, 0.65);
+  background: linear-gradient(135deg, #7c5cff, #2e86de);
+  color: #fff;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  box-shadow: 0 15px 40px rgba(124, 92, 255, 0.4);
+  transition: transform 0.1s ease, box-shadow 0.2s ease, filter 0.2s ease;
+}
+
+.button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 18px 42px rgba(124, 92, 255, 0.55);
+  filter: brightness(1.05);
+}
+
+.button:active {
+  transform: translateY(1px);
+  box-shadow: 0 10px 24px rgba(124, 92, 255, 0.35);
+  filter: brightness(0.95);
+}
+
+.footer {
+  margin-top: 16px;
+  font-size: 14px;
+  color: var(--muted);
+}
