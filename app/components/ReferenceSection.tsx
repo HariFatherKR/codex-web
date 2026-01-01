@@ -3,7 +3,11 @@ import SectionHeader from './SectionHeader';
 
 const ReferenceSection = () => {
   return (
-    <section id="references" className="relative z-10 px-6 py-20 sm:px-10 lg:py-24" aria-labelledby="reference-heading">
+    <section
+      id="references"
+      className="relative z-10 px-6 py-20 scroll-mt-28 sm:px-10 lg:py-24"
+      aria-labelledby="reference-heading"
+    >
       <div className="mx-auto flex max-w-6xl flex-col gap-12">
         <SectionHeader
           eyebrow="Experience"

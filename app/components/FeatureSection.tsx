@@ -5,7 +5,7 @@ const FeatureSection = () => {
   return (
     <section
       id="features"
-      className="relative z-10 px-6 py-20 sm:px-10 lg:py-24"
+      className="relative z-10 px-6 py-20 scroll-mt-28 sm:px-10 lg:py-24"
       aria-labelledby="feature-heading"
     >
       <div className="mx-auto flex max-w-6xl flex-col gap-12">

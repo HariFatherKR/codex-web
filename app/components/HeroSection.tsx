@@ -6,8 +6,8 @@ const HeroSection = () => {
 
   return (
     <section
-      id="hero"
-      className="relative isolate flex min-h-screen items-center justify-center overflow-hidden px-6 py-16 sm:px-10"
+      id="about"
+      className="relative isolate flex min-h-screen items-center justify-center overflow-hidden px-6 py-16 scroll-mt-28 sm:px-10"
       aria-labelledby="hero-heading"
     >
       <div className="pointer-events-none absolute inset-0 opacity-90">
