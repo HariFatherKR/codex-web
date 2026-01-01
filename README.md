@@ -19,3 +19,9 @@ npm start
 ```
 
 Vercel에 배포할 때는 `npm run build` 로 사전 빌드를 진행하면 됩니다.
+
+## Vercel 배포 팁
+
+- 환경 변수 `NEXT_PUBLIC_SITE_URL`을 배포 URL로 설정하면 Open Graph, SEO 메타데이터가 자동으로 올바른 도메인으로 채워집니다.
+- Vercel 프로젝트의 Framework Preset은 **Next.js**로 설정하고, 설치/빌드/개발 명령어는 모두 package.json의 스크립트를 그대로 사용합니다.
+- `vercel.json`에 Node.js 20 런타임을 명시하여 서버 액션이 최신 런타임으로 실행되도록 했습니다.
