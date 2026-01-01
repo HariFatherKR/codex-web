@@ -1,13 +1,19 @@
 export const heroContent = {
-  headline: 'AI와 함께 코딩하는 감각, 바이브 코딩',
-  subCopy: '문법이 아니라 흐름을, 기술이 아니라 결과를 만듭니다.',
+  headline: '차분하게 이끄는 AI 바이브 코딩',
+  subCopy: '실전 흐름과 결과로 연결되는 강의, 협업 파트너로도 바로 투입 가능한 경험을 나눕니다.',
   identity: {
     name: '정설민',
     nickname: '하리 아빠',
     roles: ['바이브 코딩 강의자', 'AI 기반 창작 교육자'],
   },
   ctaLabel: '강의 · 협업 문의하기',
+  trustNote: '문법을 가르치기보다, 만들게 합니다.',
 };
+
+export const humanNotes = [
+  'AI를 도구가 아니라 팀원처럼 씁니다.',
+  '필요할 때 바로 말을 걸 수 있는 파트너가 되고 싶습니다.',
+];
 
 export const features = [
   {
@@ -52,9 +58,11 @@ export const references = [
 ];
 
 export const ctaCopy = {
-  heading: '함께 만들어보고 싶다면, 지금 연락하세요.',
-  subheading: '강의, 워크숍, 협업 모두 열려 있습니다.',
+  heading: '함께 만들어볼 준비가 되셨다면 연락 주세요.',
+  subheading: '강의, 워크숍, 협업 모두 편하게 문의하셔도 됩니다.',
   submitLabel: '문의 보내기',
+  microcopy: '간단한 문의도 환영합니다. 부담 없이 연락 주세요.',
+  responseTime: '보통 24시간 이내 답변드립니다.',
 };
 
 export const inquiryTypes = [
