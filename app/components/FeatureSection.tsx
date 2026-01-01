@@ -1,7 +1,15 @@
-import { features, humanNotes } from '../data/content';
+'use client';
+
 import SectionHeader from './SectionHeader';
+import { useLanguage } from '../providers/LanguageProvider';
 
 const FeatureSection = () => {
+  const {
+    translation: {
+      feature: { eyebrow, title, description, humanNotes, features },
+    },
+  } = useLanguage();
+
   return (
     <section
       id="features"
@@ -10,9 +18,9 @@ const FeatureSection = () => {
     >
       <div className="mx-auto flex max-w-6xl flex-col gap-12">
         <SectionHeader
-          eyebrow="Features"
-          title="왜 바이브 코딩으로 배우면 좋을까요?"
-          description="실무 감각과 AI 활용법을 동시에 익힐 수 있도록, 흐름과 결과에 집중한 강의를 준비했습니다."
+          eyebrow={eyebrow}
+          title={title}
+          description={description}
           align="center"
           id="feature-heading"
         />

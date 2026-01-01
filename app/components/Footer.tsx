@@ -1,4 +1,7 @@
+'use client';
+
 import { socialLinks } from '../data/socialLinks';
+import { useLanguage } from '../providers/LanguageProvider';
 
 type SocialIconKey = (typeof socialLinks)[number]['icon'];
 
@@ -41,18 +44,22 @@ const Icon = ({ name }: { name: SocialIconKey }) => {
 };
 
 const Footer = () => {
+  const {
+    translation: { footer },
+  } = useLanguage();
+
   return (
     <footer className="relative z-10 mt-16 border-t border-white/5 bg-slate-950/70 px-6 py-10 sm:px-10">
       <div className="mx-auto flex max-w-5xl flex-col gap-6 text-slate-200/85">
         <div className="flex flex-col gap-2">
-          <p className="text-sm font-semibold uppercase tracking-[0.2em] text-indigo-200/80">Identity</p>
-          <h3 className="text-2xl font-bold text-white">정설민 · 하리 아빠</h3>
-          <p className="text-base leading-relaxed text-slate-200/80">바이브 코딩을 가르칩니다. 함께 만들고 싶은 아이디어가 있다면 언제든 편하게 메시지 주세요.</p>
+          <p className="text-sm font-semibold uppercase tracking-[0.2em] text-indigo-200/80">{footer.eyebrow}</p>
+          <h3 className="text-2xl font-bold text-white">{footer.title}</h3>
+          <p className="text-base leading-relaxed text-slate-200/80">{footer.description}</p>
         </div>
 
         <div className="flex flex-wrap items-center gap-3 text-sm text-slate-200/70">
-          <span className="rounded-full bg-white/5 px-3 py-1 font-medium text-white/90">“바이브 코딩을 가르칩니다”</span>
-          <span className="text-slate-400">정체성을 담은 한 문장으로 기억해 주세요.</span>
+          <span className="rounded-full bg-white/5 px-3 py-1 font-medium text-white/90">{footer.quote}</span>
+          <span className="text-slate-400">{footer.reminder}</span>
         </div>
 
         <div className="flex flex-wrap items-center gap-3">
