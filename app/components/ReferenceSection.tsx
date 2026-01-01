@@ -1,7 +1,15 @@
-import { references } from '../data/content';
+'use client';
+
 import SectionHeader from './SectionHeader';
+import { useLanguage } from '../providers/LanguageProvider';
 
 const ReferenceSection = () => {
+  const {
+    translation: {
+      reference: { eyebrow, title, description, badge, items },
+    },
+  } = useLanguage();
+
   return (
     <section
       id="references"
@@ -10,15 +18,15 @@ const ReferenceSection = () => {
     >
       <div className="mx-auto flex max-w-6xl flex-col gap-12">
         <SectionHeader
-          eyebrow="Experience"
-          title="실전으로 증명된 강의와 협업"
-          description="강의, 워크숍, 프로젝트까지 결과물과 팀워크를 중심으로 쌓아온 기록입니다."
+          eyebrow={eyebrow}
+          title={title}
+          description={description}
           align="center"
           id="reference-heading"
         />
 
         <div className="grid grid-cols-1 gap-4 sm:gap-6 md:grid-cols-2">
-          {references.map((reference) => (
+          {items.map((reference) => (
             <article
               key={reference.title}
               className="flex h-full flex-col gap-3 rounded-2xl bg-slate-900/70 p-6 text-left shadow-[0_20px_60px_rgba(10,16,32,0.45)] ring-1 ring-white/10 transition hover:-translate-y-1 hover:ring-indigo-200/40"
@@ -29,7 +37,7 @@ const ReferenceSection = () => {
               </div>
               <p className="text-base leading-relaxed text-slate-200/85">{reference.description}</p>
               <span className="mt-auto inline-flex w-fit items-center gap-2 rounded-full bg-white/5 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-indigo-100 ring-1 ring-indigo-300/30">
-                정리된 경험
+                {badge}
               </span>
             </article>
           ))}

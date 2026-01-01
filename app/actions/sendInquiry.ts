@@ -1,5 +1,7 @@
 'use server';
 
+import { getTranslation, type Language } from '../data/translations';
+
 export type InquiryFormState = {
   status: 'idle' | 'error' | 'success';
   message: string;
@@ -11,16 +13,18 @@ export async function sendInquiry(
   _prevState: InquiryFormState,
   formData: FormData
 ): Promise<InquiryFormState> {
+  const langValue = formData.get('lang')?.toString();
+  const lang: Language = langValue === 'en' ? 'en' : 'ko';
+  const translation = getTranslation(lang);
   const name = formData.get('name')?.toString().trim();
   const contact = formData.get('contact')?.toString().trim();
   const type = formData.get('type')?.toString();
-  const readableType =
-    type === 'lecture' ? '강의' : type === 'collaboration' ? '협업' : type === 'other' ? '기타' : '';
+  const readableType = translation.cta.inquiryTypes.find((option) => option.value === type)?.label ?? '';
 
   if (!name || !contact) {
     return {
       status: 'error',
-      message: '이름과 연락처를 입력해 주세요.',
+      message: translation.cta.missingFields,
     };
   }
 
@@ -30,7 +34,7 @@ export async function sendInquiry(
 
   return {
     status: 'success',
-    message: `문의가 전달되었습니다${summary}. 빠르게 답변드릴게요!`,
+    message: `${translation.cta.successPrefix}${summary}${translation.cta.successSuffix}`,
   };
 }
 

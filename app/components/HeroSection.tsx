@@ -1,8 +1,14 @@
+'use client';
+
 import Link from 'next/link';
-import { heroContent } from '../data/content';
+import { useLanguage } from '../providers/LanguageProvider';
 
 const HeroSection = () => {
-  const { headline, subCopy, identity, ctaLabel, trustNote } = heroContent;
+  const {
+    translation: {
+      hero: { headline, subCopy, identity, ctaLabel, trustNote, partnership, partnerLine, scrollLabel },
+    },
+  } = useLanguage();
 
   return (
     <section
@@ -39,7 +45,7 @@ const HeroSection = () => {
             {identity.roles[1]}
           </div>
           <div className="rounded-full bg-white/5 px-4 py-2 font-semibold text-slate-100 ring-1 ring-white/10">
-            실전 경험 + AI 협업 파트너십
+            {partnership}
           </div>
         </div>
 
@@ -51,8 +57,8 @@ const HeroSection = () => {
             {ctaLabel}
             <span className="ml-2 text-lg transition-transform group-hover:translate-x-0.5">↘</span>
           </Link>
-          <p className="text-sm text-slate-300/80">안정적으로 함께할 파트너를 찾고 계시다면, 먼저 이야기 나눠보세요.</p>
-          <p className="text-xs uppercase tracking-[0.2em] text-slate-300/70">Scroll to explore</p>
+          <p className="text-sm text-slate-300/80">{partnerLine}</p>
+          <p className="text-xs uppercase tracking-[0.2em] text-slate-300/70">{scrollLabel}</p>
         </div>
       </div>
     </section>

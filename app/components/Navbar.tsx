@@ -2,21 +2,16 @@
 
 import Link from 'next/link';
 import { useEffect, useMemo, useState } from 'react';
-
-const navItems = [
-  { label: 'Home', href: '#home' },
-  { label: 'About', href: '#about' },
-  { label: 'Features', href: '#features' },
-  { label: 'References', href: '#references' },
-  { label: 'Contact', href: '#contact' },
-];
+import { useLanguage } from '../providers/LanguageProvider';
 
 const Navbar = () => {
+  const { lang, toggleLanguage, translation } = useLanguage();
   const [activeSection, setActiveSection] = useState<string>('home');
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const navItems = translation.navbar.items;
 
-  const sectionIds = useMemo(() => navItems.map((item) => item.href.replace('#', '')), []);
+  const sectionIds = useMemo(() => navItems.map((item) => item.href.replace('#', '')), [navItems]);
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 10);
@@ -78,10 +73,22 @@ const Navbar = () => {
       >
         <div className="flex items-center gap-2 text-sm font-semibold text-indigo-100">
           <span className="h-2.5 w-2.5 rounded-full bg-emerald-300" aria-hidden="true" />
-          <span>바이브 코딩</span>
+          <span>{translation.navbar.brand}</span>
         </div>
 
         <div className="flex items-center gap-2">
+          <button
+            type="button"
+            onClick={toggleLanguage}
+            className="inline-flex items-center gap-1 rounded-full border border-white/10 bg-white/5 px-3 py-2 text-xs font-semibold text-white shadow-inner transition hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-200 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950"
+            aria-label="Toggle language"
+            aria-pressed={lang === 'en'}
+          >
+            <span className={lang === 'ko' ? 'text-white' : 'text-slate-300/80'}>KR</span>
+            <span className="text-white/50">|</span>
+            <span className={lang === 'en' ? 'text-white' : 'text-slate-300/80'}>EN</span>
+          </button>
+
           <button
             type="button"
             className={`flex h-10 w-10 items-center justify-center rounded-xl border border-white/10 bg-white/5 text-white shadow-inner transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-200 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950 md:hidden ${

@@ -1,6 +1,7 @@
 import './globals.css';
 import type { Metadata } from 'next';
 import type { ReactNode } from 'react';
+import { LanguageProvider } from './providers/LanguageProvider';
 
 export const metadata: Metadata = {
   title: '정설민(하리 아빠) · 바이브 코딩 강의자',
@@ -17,7 +18,9 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="ko">
-      <body className="min-h-screen bg-slate-950 text-slate-50 antialiased">{children}</body>
+      <body className="min-h-screen bg-slate-950 text-slate-50 antialiased">
+        <LanguageProvider>{children}</LanguageProvider>
+      </body>
     </html>
   );
 }
