@@ -51,6 +51,12 @@ body {
   line-height: 1.5;
 }
 
+.status {
+  margin: 0 0 12px;
+  color: var(--muted);
+  font-size: 14px;
+}
+
 .message {
   font-size: 22px;
   font-weight: 700;

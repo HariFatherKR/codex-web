@@ -11,15 +11,18 @@ const messages = [
 
 export default function Home() {
   const [index, setIndex] = useState(0);
+  const totalMessages = messages.length;
 
   const headline = useMemo(
-    () => ['하리아빠 버튼', '하리아빠 버튼을 눌러 보세요'],
+    () => ['하리아빠 버튼', '버튼을 눌러 새로운 메시지를 확인하세요'],
     []
   );
 
   const handleClick = () => {
     setIndex((current) => (current + 1) % messages.length);
   };
+
+  const currentMessage = messages[index];
 
   return (
     <main className="main" role="main">
@@ -31,8 +34,12 @@ export default function Home() {
           <p className="description">{headline[1]}</p>
         </header>
 
+        <p className="status" aria-live="polite">
+          {index + 1} / {totalMessages}번째 메시지
+        </p>
+
         <div className="message" id="message-box" aria-live="polite">
-          {messages[index]}
+          {currentMessage}
         </div>
 
         <button
