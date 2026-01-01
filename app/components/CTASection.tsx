@@ -42,7 +42,7 @@ const CTASection = () => {
       aria-labelledby="cta-heading"
     >
       <div className="absolute inset-x-6 top-6 h-44 rounded-3xl bg-gradient-to-b from-emerald-300/25 via-transparent to-transparent blur-3xl" />
-      <div className="relative mx-auto max-w-4xl overflow-hidden rounded-3xl bg-slate-900/70 p-8 shadow-[0_25px_80px_rgba(10,16,32,0.5)] ring-1 ring-white/10 sm:p-10">
+      <div className="relative mx-auto max-w-4xl overflow-hidden rounded-3xl bg-slate-900/80 p-8 shadow-[0_25px_80px_rgba(10,16,32,0.55)] ring-1 ring-white/10 sm:p-10">
         <div className="grid grid-cols-1 gap-10 lg:grid-cols-[1.2fr_1fr] lg:items-start">
           <div className="space-y-6">
             <SectionHeader
@@ -70,40 +70,52 @@ const CTASection = () => {
           <form
             ref={formRef}
             action={formAction}
-            className="flex w-full flex-col gap-4 rounded-2xl bg-slate-950/60 p-6 ring-1 ring-white/10"
+            className="flex w-full flex-col gap-5 rounded-2xl bg-slate-950/70 p-6 ring-1 ring-white/10 backdrop-blur"
           >
-            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-              <label className="flex flex-col gap-2 text-sm font-semibold text-white">
-                이름<span className="text-indigo-200">*</span>
-                <input
-                  required
-                  name="name"
-                  type="text"
-                  autoComplete="name"
-                  placeholder="이름 또는 팀명을 입력하세요"
-                  className="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-base text-white placeholder:text-slate-400 focus:border-emerald-300 focus:outline-none focus:ring-2 focus:ring-emerald-200/60"
-                />
-              </label>
-              <label className="flex flex-col gap-2 text-sm font-semibold text-white">
-                연락처 또는 이메일<span className="text-indigo-200">*</span>
-                <input
-                  required
-                  name="contact"
-                  type="text"
-                  autoComplete="email"
-                  placeholder="연락받을 정보를 남겨주세요"
-                  className="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-base text-white placeholder:text-slate-400 focus:border-emerald-300 focus:outline-none focus:ring-2 focus:ring-emerald-200/60"
-                />
-              </label>
+            <div className="rounded-2xl border border-white/5 bg-slate-900/70 p-4 ring-1 ring-white/5">
+              <div className="mb-3 flex items-center justify-between gap-3">
+                <p className="text-sm font-semibold text-white">연락처를 알려주세요</p>
+                <span className="rounded-full bg-indigo-500/10 px-3 py-1 text-xs font-medium text-indigo-100">필수</span>
+              </div>
+              <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+                <label className="flex flex-col gap-2 text-sm font-semibold text-white">
+                  이름<span className="text-indigo-200">*</span>
+                  <input
+                    required
+                    name="name"
+                    type="text"
+                    autoComplete="name"
+                    placeholder="이름 또는 팀명을 입력하세요"
+                    className="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-base text-white placeholder:text-slate-400 focus:border-emerald-300 focus:outline-none focus:ring-2 focus:ring-emerald-200/60"
+                  />
+                </label>
+                <label className="flex flex-col gap-2 text-sm font-semibold text-white">
+                  연락처 또는 이메일<span className="text-indigo-200">*</span>
+                  <input
+                    required
+                    name="contact"
+                    type="text"
+                    autoComplete="email"
+                    placeholder="연락받을 정보를 남겨주세요"
+                    className="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-base text-white placeholder:text-slate-400 focus:border-emerald-300 focus:outline-none focus:ring-2 focus:ring-emerald-200/60"
+                  />
+                </label>
+              </div>
             </div>
 
-            <label className="flex flex-col gap-2 text-sm font-semibold text-white">
-              문의 유형 (선택)
+            <div className="rounded-2xl border border-indigo-200/10 bg-slate-900/60 p-4 ring-1 ring-indigo-200/10">
+              <div className="mb-3 flex items-center justify-between gap-3">
+                <div>
+                  <p className="text-sm font-semibold text-white">문의 유형</p>
+                  <p className="text-xs text-slate-300/80">진행 방향을 빠르게 이해하기 위해 선택해주세요.</p>
+                </div>
+                <span className="rounded-full bg-emerald-400/15 px-3 py-1 text-xs font-medium text-emerald-200">선택</span>
+              </div>
               <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
                 {inquiryTypes.map((option) => (
                   <label
                     key={option.value}
-                    className="group flex cursor-pointer items-center gap-2 rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-slate-100 transition hover:border-indigo-200/70 hover:text-indigo-100"
+                    className="group flex cursor-pointer items-center gap-3 rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-slate-100 transition hover:-translate-y-0.5 hover:border-indigo-200/70 hover:text-indigo-50"
                   >
                     <input
                       type="radio"
@@ -111,11 +123,40 @@ const CTASection = () => {
                       value={option.value}
                       className="accent-emerald-400"
                     />
-                    <span className="font-medium">{option.label}</span>
+                    <div className="flex flex-col">
+                      <span className="font-medium">{option.label}</span>
+                      <span className="text-xs text-slate-300/85">무엇이든 편하게 말씀해 주세요.</span>
+                    </div>
                   </label>
                 ))}
               </div>
-            </label>
+            </div>
+
+            <div className="rounded-2xl border border-emerald-200/15 bg-gradient-to-br from-slate-950/80 via-slate-900/70 to-indigo-950/60 p-4 ring-1 ring-emerald-200/15">
+              <div className="mb-3 flex items-center justify-between gap-3">
+                <div>
+                  <p className="text-sm font-semibold text-white">프로젝트 / 문의 내용</p>
+                  <p className="text-xs text-slate-300/80">목표, 일정, 원하는 방식 등 자유롭게 적어 주세요.</p>
+                </div>
+                <span className="rounded-full bg-white/5 px-3 py-1 text-xs font-medium text-slate-100">선택 입력</span>
+              </div>
+              <textarea
+                name="details"
+                rows={4}
+                placeholder="예) 4월 내 워크숍 진행, 비개발자 대상 실습 커리큘럼 제안이 필요해요."
+                className="w-full rounded-xl border border-white/10 bg-slate-900/70 px-4 py-3 text-base text-white placeholder:text-slate-400 focus:border-emerald-300 focus:outline-none focus:ring-2 focus:ring-emerald-200/60"
+              />
+              <div className="mt-3 grid grid-cols-1 gap-2 text-xs text-slate-200/85 sm:grid-cols-2">
+                <div className="flex items-center gap-2 rounded-lg border border-white/5 bg-white/5 px-3 py-2">
+                  <span className="text-emerald-200">●</span>
+                  <span>강의 대상과 기대하는 결과를 공유해 주시면 좋아요.</span>
+                </div>
+                <div className="flex items-center gap-2 rounded-lg border border-white/5 bg-white/5 px-3 py-2">
+                  <span className="text-emerald-200">●</span>
+                  <span>예상 일정·형식·도움이 필요한 부분을 알려주세요.</span>
+                </div>
+              </div>
+            </div>
 
             <div className="flex flex-col gap-2">
               <SubmitButton />
