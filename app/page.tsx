@@ -3,6 +3,7 @@ import FeatureSection from './components/FeatureSection';
 import Footer from './components/Footer';
 import HeroSection from './components/HeroSection';
 import Navbar from './components/Navbar';
+import KakaoFloatingButton from './components/KakaoFloatingButton';
 import ReferenceSection from './components/ReferenceSection';
 
 export default function Home() {
@@ -18,6 +19,7 @@ export default function Home() {
         <CTASection />
         <Footer />
       </div>
+      <KakaoFloatingButton />
     </main>
   );
 }
