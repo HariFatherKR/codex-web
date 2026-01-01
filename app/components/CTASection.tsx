@@ -2,11 +2,11 @@
 
 import { useEffect, useMemo, useRef } from 'react';
 import { useFormState, useFormStatus } from 'react-dom';
-import { ctaCopy, inquiryTypes } from '../data/content';
 import { initialInquiryState, sendInquiry } from '../actions/sendInquiry';
 import SectionHeader from './SectionHeader';
+import { useLanguage } from './LanguageProvider';
 
-const SubmitButton = () => {
+const SubmitButton = ({ label, pendingLabel }: { label: string; pendingLabel: string }) => {
   const { pending } = useFormStatus();
 
   return (
@@ -15,12 +15,14 @@ const SubmitButton = () => {
       className="inline-flex items-center justify-center rounded-xl bg-emerald-400 px-4 py-3 text-base font-semibold text-slate-950 shadow-[0_10px_30px_rgba(52,211,153,0.35)] transition hover:-translate-y-0.5 hover:shadow-[0_14px_40px_rgba(52,211,153,0.45)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-200 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950 disabled:cursor-not-allowed disabled:opacity-80"
       disabled={pending}
     >
-      {pending ? '보내는 중...' : ctaCopy.submitLabel}
+      {pending ? pendingLabel : label}
     </button>
   );
 };
 
 const CTASection = () => {
+  const { lang, copy } = useLanguage();
+  const { cta } = copy;
   const [state, formAction] = useFormState(sendInquiry, initialInquiryState);
   const formRef = useRef<HTMLFormElement | null>(null);
   const messageTone = useMemo(() => {
@@ -46,15 +48,15 @@ const CTASection = () => {
         <div className="grid grid-cols-1 gap-10 lg:grid-cols-[1.2fr_1fr] lg:items-start">
           <div className="space-y-6">
             <SectionHeader
-              eyebrow="Contact"
-              title={ctaCopy.heading}
-              description={ctaCopy.subheading}
+              eyebrow={cta.eyebrow}
+              title={cta.heading}
+              description={cta.subheading}
               id="cta-heading"
             />
             <div className="space-y-3 rounded-2xl border border-white/5 bg-white/5 p-4 text-sm text-slate-200/85">
               <p className="flex items-center gap-2 font-semibold text-white">
                 <span aria-hidden className="text-lg text-emerald-200">🤝</span>
-                {ctaCopy.microcopy}
+                {cta.microcopy}
               </p>
             </div>
           </div>
@@ -64,33 +66,34 @@ const CTASection = () => {
             action={formAction}
             className="flex w-full flex-col gap-6 rounded-2xl bg-slate-950/80 p-8 ring-1 ring-white/10 backdrop-blur"
           >
+            <input type="hidden" name="lang" value={lang} />
             <div className="space-y-3">
               <div className="flex items-center justify-between gap-3">
-                <p className="text-sm font-semibold text-white">연락처를 남겨주세요</p>
-                <span className="rounded-full bg-indigo-500/10 px-3 py-1 text-[11px] font-semibold text-indigo-100">필수</span>
+                <p className="text-sm font-semibold text-white">{cta.form.contactPrompt}</p>
+                <span className="rounded-full bg-indigo-500/10 px-3 py-1 text-[11px] font-semibold text-indigo-100">{cta.form.required}</span>
               </div>
               <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                 <label htmlFor="name" className="space-y-2 text-sm font-semibold text-white">
-                  <span className="text-slate-100">이름</span>
+                  <span className="text-slate-100">{cta.form.nameLabel}</span>
                   <input
                     id="name"
                     required
                     name="name"
                     type="text"
                     autoComplete="name"
-                    placeholder="정설민 / 팀명"
+                    placeholder={cta.form.namePlaceholder}
                     className="h-12 w-full rounded-xl border border-white/10 bg-white/5 px-4 text-base text-white placeholder:text-slate-400 focus:border-emerald-300 focus:outline-none focus:ring-2 focus:ring-emerald-200/60"
                   />
                 </label>
                 <label htmlFor="contact" className="space-y-2 text-sm font-semibold text-white">
-                  <span className="text-slate-100">연락처 또는 이메일</span>
+                  <span className="text-slate-100">{cta.form.contactLabel}</span>
                   <input
                     id="contact"
                     required
                     name="contact"
                     type="text"
                     autoComplete="email"
-                    placeholder="메일 / 전화번호"
+                    placeholder={cta.form.contactPlaceholder}
                     className="h-12 w-full rounded-xl border border-white/10 bg-white/5 px-4 text-base text-white placeholder:text-slate-400 focus:border-emerald-300 focus:outline-none focus:ring-2 focus:ring-emerald-200/60"
                   />
                 </label>
@@ -99,11 +102,11 @@ const CTASection = () => {
 
             <div className="space-y-3">
               <div className="flex items-center justify-between gap-3">
-                <p className="text-sm font-semibold text-white">문의 유형</p>
-                <span className="rounded-full bg-emerald-400/15 px-3 py-1 text-[11px] font-semibold text-emerald-200">선택</span>
+                <p className="text-sm font-semibold text-white">{cta.form.typeLabel}</p>
+                <span className="rounded-full bg-emerald-400/15 px-3 py-1 text-[11px] font-semibold text-emerald-200">{cta.form.typeOptional}</span>
               </div>
               <div className="flex flex-wrap gap-3">
-                {inquiryTypes.map((option) => (
+                {cta.inquiryTypes.map((option) => (
                   <label
                     key={option.value}
                     htmlFor={option.value}
@@ -124,20 +127,20 @@ const CTASection = () => {
 
             <div className="space-y-3">
               <div className="flex items-center justify-between gap-3">
-                <p className="text-sm font-semibold text-white">문의 내용</p>
-                <span className="rounded-full bg-white/10 px-3 py-1 text-[11px] font-semibold text-slate-100">선택</span>
+                <p className="text-sm font-semibold text-white">{cta.form.detailLabel}</p>
+                <span className="rounded-full bg-white/10 px-3 py-1 text-[11px] font-semibold text-slate-100">{cta.form.detailOptional}</span>
               </div>
               <textarea
                 name="details"
                 rows={4}
-                placeholder="예) 5월 워크숍, 비개발자 대상 실습 커리큘럼 요청"
+                placeholder={cta.form.detailPlaceholder}
                 className="min-h-[150px] w-full rounded-xl border border-white/10 bg-slate-900/80 px-4 py-3 text-base text-white placeholder:text-slate-400 focus:border-emerald-300 focus:outline-none focus:ring-2 focus:ring-emerald-200/60 sm:min-h-[190px]"
               />
             </div>
 
             <div className="flex flex-col gap-3 pt-2">
-              <SubmitButton />
-              <p className="text-sm text-slate-300/85">{ctaCopy.responseTime}</p>
+              <SubmitButton label={cta.actions.submitLabel} pendingLabel={cta.actions.sendingLabel} />
+              <p className="text-sm text-slate-300/85">{cta.responseTime}</p>
             </div>
 
             {state.message ? (

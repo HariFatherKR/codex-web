@@ -1,5 +1,8 @@
 'use server';
 
+import type { LanguageKey } from '../data/translations';
+import { inquiryMessages } from '../data/translations';
+
 export type InquiryFormState = {
   status: 'idle' | 'error' | 'success';
   message: string;
@@ -11,16 +14,19 @@ export async function sendInquiry(
   _prevState: InquiryFormState,
   formData: FormData
 ): Promise<InquiryFormState> {
+  const langField = formData.get('lang')?.toString();
+  const lang: LanguageKey = langField === 'en' ? 'en' : 'ko';
+  const copy = inquiryMessages[lang];
+
   const name = formData.get('name')?.toString().trim();
   const contact = formData.get('contact')?.toString().trim();
-  const type = formData.get('type')?.toString();
-  const readableType =
-    type === 'lecture' ? '강의' : type === 'collaboration' ? '협업' : type === 'other' ? '기타' : '';
+  const type = formData.get('type')?.toString() as 'lecture' | 'collaboration' | 'other' | null;
+  const readableType = type ? copy.typeLabels[type] : '';
 
   if (!name || !contact) {
     return {
       status: 'error',
-      message: '이름과 연락처를 입력해 주세요.',
+      message: copy.missingFields,
     };
   }
 
@@ -30,7 +36,7 @@ export async function sendInquiry(
 
   return {
     status: 'success',
-    message: `문의가 전달되었습니다${summary}. 빠르게 답변드릴게요!`,
+    message: `${copy.successPrefix}${summary}. ${copy.successSuffix}`,
   };
 }
 

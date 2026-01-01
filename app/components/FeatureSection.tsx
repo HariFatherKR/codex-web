@@ -1,7 +1,13 @@
-import { features, humanNotes } from '../data/content';
+'use client';
+
 import SectionHeader from './SectionHeader';
+import { useLanguage } from './LanguageProvider';
 
 const FeatureSection = () => {
+  const {
+    copy: { features },
+  } = useLanguage();
+
   return (
     <section
       id="features"
@@ -10,15 +16,15 @@ const FeatureSection = () => {
     >
       <div className="mx-auto flex max-w-6xl flex-col gap-12">
         <SectionHeader
-          eyebrow="Features"
-          title="왜 바이브 코딩으로 배우면 좋을까요?"
-          description="실무 감각과 AI 활용법을 동시에 익힐 수 있도록, 흐름과 결과에 집중한 강의를 준비했습니다."
+          eyebrow={features.eyebrow}
+          title={features.title}
+          description={features.description}
           align="center"
           id="feature-heading"
         />
 
         <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
-          {humanNotes.map((note) => (
+          {features.humanNotes.map((note) => (
             <p
               key={note}
               className="rounded-2xl bg-slate-900/70 px-5 py-4 text-base font-semibold text-indigo-100 ring-1 ring-white/5"
@@ -29,7 +35,7 @@ const FeatureSection = () => {
         </div>
 
         <div className="grid grid-cols-1 gap-4 sm:gap-6 md:grid-cols-2">
-          {features.map((feature) => (
+          {features.list.map((feature) => (
             <article
               key={feature.title}
               className="group flex h-full flex-col gap-3 rounded-2xl bg-slate-900/70 p-6 text-left shadow-[0_20px_60px_rgba(10,16,32,0.45)] ring-1 ring-white/10 transition hover:-translate-y-1 hover:ring-indigo-200/40"
