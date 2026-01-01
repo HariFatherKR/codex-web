@@ -38,7 +38,7 @@ const CTASection = () => {
   return (
     <section
       id="contact"
-      className="relative z-10 px-6 py-24 sm:px-10"
+      className="relative z-10 px-6 py-24 scroll-mt-28 sm:px-10"
       aria-labelledby="cta-heading"
     >
       <div className="absolute inset-x-6 top-6 h-44 rounded-3xl bg-gradient-to-b from-emerald-300/25 via-transparent to-transparent blur-3xl" />
